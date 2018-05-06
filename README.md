@@ -12,6 +12,7 @@ A version that doesn't use the API can found [here](http://phonghtran.com/labs/w
 4. The API also only allowed for fairly coarse time increments (3 hours), so decided to lean into that.
 5. I did like the idea of different locations. Made it easier to test. Would be more useful if users could customize. 
 6. Accessibility. Colors were pulled from Google Material Design. Choose a chunk thick font to stand up to the colors. Wouldn't pass AAA, and the lighter colors push the contrast at 3.64:1. Originally I was using black and bold versions of Biryani, but swapped the bold for regular for visual contrast. The bold at smaller sizes was losing legibility.
+7. The icons were created with the typeface as the basis for the shapes. Needed more time to fully execute.
 
 
 ## Tradeoffs
@@ -21,6 +22,7 @@ A version that doesn't use the API can found [here](http://phonghtran.com/labs/w
 3. Too much visual styling and HTML generation in the Javascript. It allowed me to generate color gradients on the fly. If I had committed to the style earlier, I probably would have turned them into CSS classes.
 4. Went for super minimal data presentation in-lieu of stats like humidity and wind. Cleaner but less useful. 
 5. The JS has a few cheats to save time like size-specific magic numbers and inefficient loops.
+6. The intention was to pull shapes from the typeface to create the icons, but the timeframe didn't allow for much finesse.
 
 ## Wishlist
 
