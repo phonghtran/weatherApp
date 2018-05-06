@@ -36,3 +36,4 @@ A version that doesn't use the API can found [here](http://phonghtran.com/labs/w
 * Recent search list to mesh with favorites list
 * The weather states for "Atmosphere" is pretty varied, it'd be nice to add more animations and icons for that
 * More robust animations, probably refactor to be more versatile
+* Better redraw when resizing the browser

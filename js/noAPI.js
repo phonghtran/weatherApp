@@ -1,12 +1,6 @@
-/* 
-==============================================
-==============================================
-Doc ready
-==============================================
-==============================================
-*/
 
-var currentLocation = {
+
+var currentLocation = { // leftover, not used but ready for usage
 		longitude: -73.949577,
 		latitude: 40.650101,
 		colorSpectrum: [
@@ -14,17 +8,18 @@ var currentLocation = {
 			'#7986CB'
 		]
 	},
-	defaultLocations = {
+	defaultLocations = { // storage of basic data for preset locations
 		brooklyn: { // brooklyn
-			name: 'brooklyn',
-			id: 5110302,
-			preferredCard: 'cardBrooklyn',
-			longitude: -73.949577,
+			name: 'brooklyn', // for targeting purposes
+			id: 5110302, // from API reference
+			preferredCard: 'cardBrooklyn', // a default target for data
+			longitude: -73.949577, 
 			latitude: 40.650101,
-			colorSpectrum: [
+			colorSpectrum: [ // for the extended forcast gradient
 				'#1A237E',
 				'#7986CB'
 			],
+			// a cover image for large desktops. super faint
 			coverImage: 'https://untappedcities-wpengine.netdna-ssl.com/wp-content/uploads/2017/06/2_The-Top-10-Secrets-of-Downtown-Brooklyn-in-NYC_Brooklyn-Bridge_Sunset_NYC_Untapped-Cities.v1.jpg'
 		},
 		tokyo: { 
@@ -78,8 +73,20 @@ var currentLocation = {
 		
 	},
 	wW = 1024, wH = 768, cW = 1024, cH = 768, // window size and canvas height
-	canvasAspectRatio = 1.33, // 4/3 ratio
-	canvasObjectStorage = {};
+	mainWeatherCondition = { // an object for setting up main animation
+		weatherId: 800,
+		isNight: false
+	}, 
+	canvasAspectRatio = 1.33, // 4/3 ratio, for the animations 
+	canvasObjectStorage = {}; // a container for rendering the animation
+
+/* 
+==============================================
+==============================================
+Doc ready
+==============================================
+==============================================
+*/
 
 $( document ).ready(function() {
 	$(window).resize(function(){
@@ -87,25 +94,37 @@ $( document ).ready(function() {
 		wH = $(window).height();
 
 		if (wW > 700) {
-			canvasAspectRatio = 3;
+			canvasAspectRatio = 3; // a bit more rectangular 
 
 			$('#searchToggle').attr('disabled', true);
 		} else {
+			canvasAspectRatio = 1.33;
+
 			$('#searchToggle').attr('disabled', false);
 		}
 
 		cW = $('#cardHolder').width();
 		cH = cW / canvasAspectRatio;
+
+		$('#canvasCurrentCity').attr({
+			width: cW,
+			height: cH
+		});
+
+		setupAnimation();
 	}).resize();
 
-	for (city in defaultLocations){
-		parseWeather(defaultLocations[city].name);
+	// Call the API
+	for (city in defaultLocations){ 
+		parseWeather(defaultLocations[city].name); // no API
+		// getWeatherData(defaultLocations[city]); // the API
 	}
 
 	// turn back on at end
 	// navigator.geolocation.getCurrentPosition(geo_success, geo_error);
 
 
+	// For mobile city switching
 	$('#searchToggle').on('click',function(e){
 		e.preventDefault();
 
@@ -123,6 +142,7 @@ $( document ).ready(function() {
 		}
 	});
 
+	// Swap the cards the fast way
 	$('li.card').on('click',function(e){
 		e.preventDefault();
 
@@ -139,14 +159,22 @@ $( document ).ready(function() {
 }); // doc ready
 
 
-function setupAnimation(mainWeatherCondition){
+/* 
+==============================================
+==============================================
+Main animation rendering
+==============================================
+==============================================
+*/
+
+function setupAnimation(){
 	var mainCategory = parseInt(mainWeatherCondition.weatherId / 100);
 	
 	canvasObjectStorage = {};
 
 	switch  (mainCategory){
 		case 2: // Group 2xx: Thunderstorm
-
+			// One stable icon and one randomly fires
 			for (var i = 0; i < 2; i++){
 				canvasObjectStorage[i] = {};
 
@@ -241,9 +269,9 @@ function setupAnimation(mainWeatherCondition){
 				}
 
 				canvasObjectStorage[i].targetViewBow = {
-					x: 0,
+					x: cW * -0.1,
 					y: cH - (cH * 0.08 * i),
-					w: cW,
+					w: cW * 1.2,
 					h: cH * 0.2 * Math.random()
 				}
 
@@ -341,13 +369,17 @@ function setupAnimation(mainWeatherCondition){
 } // setupAnimation
 
 function renderAnimation(){
-	var activeCanvas = $('.card.active canvas'),
-		ctx = activeCanvas[0].getContext('2d');
+	var activeCanvas = document.getElementById('canvasCurrentCity');
+	
+	if (!activeCanvas) return;
+
+	var ctx = activeCanvas.getContext('2d');
+
 		
 	ctx.clearRect(0, 0, cW, cH);
 
-
 	for (object in canvasObjectStorage){
+		// Check for what transforms to do
 		for (newTransform in canvasObjectStorage[object].transformation){
 			if (newTransform == 'add'){
 				for (propType in canvasObjectStorage[object].transformation[newTransform]){
@@ -421,20 +453,54 @@ function renderAnimation(){
 	});
 } // renderAnimation
 
+
+function prepSVGPathForCanvas(vectorTarget, css){
+	var cssString = 'path, polygon { fill: rgba(255, 255, 255, 0.25); }';
+
+	if (typeof css === 'object'){
+		for (var key in css) {
+			if (css.hasOwnProperty(key)) {
+				cssString += key + '{';
+					for (var keyCssItem in css[key]) {
+						if (css[key].hasOwnProperty(keyCssItem)) {
+							cssString += keyCssItem + ':' + css[key][keyCssItem] + ';'
+						}
+					}
+				cssString += '}'
+			}
+		}
+	} 
+
+	return 'data:image/svg+xml,' + 
+		encodeURIComponent(
+			'<svg xmlns="http://www.w3.org/2000/svg" width="' + 
+			vectorTarget.width + '" height="' + vectorTarget.height + 
+			'" viewBox="0 0 ' + vectorTarget.width + ' ' + vectorTarget.height + '">' +
+			'<style type="text/css"><![CDATA[ '+ cssString + '  ]]></style>' +
+			vectorTarget.path + '</svg>'
+		);
+} //prepSVGPathForCanvas
+
+/* 
+==============================================
+==============================================
+Main HTML generator
+==============================================
+==============================================
+*/
 function parseWeather(jsonObjectName, targetCard){
-	var jsonObject = cityWeatherInfo[jsonObjectName],
-		cityName = jsonObject.city.name,
-		listItemPosition = 0,
-		totalCount = 0,
-		currentColor = 1,
-		lastDay, newDayCheck = false,
-		cardContents = '',
-		colorSpectrum = new Rainbow(),
-		mainWeatherCondition = {};
+	var jsonObject = cityWeatherInfo[jsonObjectName], // pull from the big JSON file, the API updates this 
+		listItemPosition = 0, // the position of reading each weather entry
+		totalCount = 0, // total rendered items
+		currentColor = 1, // to pull from gradient
+		lastDay, newDayCheck = false, // for switching from hourly to daily entries
+		cardContents = '', // holder for HTML
+		colorSpectrum = new Rainbow(); // uses library for color gradient
+		
 
-	targetCard = targetCard || defaultLocations[jsonObjectName].preferredCard;
+	targetCard = targetCard || defaultLocations[jsonObjectName].preferredCard; 
 
-	colorSpectrum.setNumberRange(0, 10);
+	colorSpectrum.setNumberRange(0, 10); // 10 new hex colors for gradient
 	colorSpectrum.setSpectrum(
 		defaultLocations[jsonObjectName].colorSpectrum[0], 
 		defaultLocations[jsonObjectName].colorSpectrum[1]
@@ -443,7 +509,7 @@ function parseWeather(jsonObjectName, targetCard){
 	for (var listItem in jsonObject.list) {
 		var currentListItem = jsonObject['list'][listItem],
 			dateObj = new Date(currentListItem['dt'] * 1000),
-			itemPrep = {
+			itemPrep = { // formatting the API into a object passable to the helper functions
 				bgColor: '' , 
 				classes: '',
 
@@ -469,7 +535,7 @@ function parseWeather(jsonObjectName, targetCard){
 		// Group 800: Clear
 		// Group 80x: Clouds
 
-		if (listItemPosition == 0){
+		if (listItemPosition == 0){ // first main entry
 			lastDay = itemPrep.currentDay; // set up for later items
 			mainWeatherCondition = {
 				weatherId: itemPrep.weatherId,
@@ -494,21 +560,21 @@ function parseWeather(jsonObjectName, targetCard){
 			}
 
 			totalCount++;
-		} else if (listItemPosition < 5 && listItemPosition > 0){
-			currentColor = (wW > 700) ? 3: currentColor + 1;
+		} else if (listItemPosition < 5 && listItemPosition > 0){ // hourly items
+			currentColor = (wW > 700) ? 3: currentColor + 1; // desktops is a row of same, mobile is a changing gradient
 			itemPrep.bgColor = '#' + colorSpectrum.colourAt(currentColor);
 			itemPrep.timestamp = prettyTime(itemPrep.currentHour);
 
 			cardContents += generateExtendedForecastItem(itemPrep);
 			totalCount++;
 
-		} else {
+		} else { // daily items 
 			if (lastDay != itemPrep.currentDay){
 				newDayCheck = true;
 				lastDay = itemPrep.currentDay;
 			} 
 
-			if (newDayCheck == true && itemPrep.currentHour >= 12){
+			if (newDayCheck == true && itemPrep.currentHour >= 12){ // if new day, and look for something roughly at noon
 				currentColor = (wW > 700) ? 5 : currentColor + 1;
 
 				itemPrep.bgColor = '#' + colorSpectrum.colourAt(currentColor);
@@ -524,7 +590,7 @@ function parseWeather(jsonObjectName, targetCard){
 		} // first then tri-hourly then daily
 		
 		listItemPosition++;
-		if (targetCard != 'cardBrooklyn') break;
+		if (targetCard != 'cardBrooklyn') break; // don't waste time on canvas and extended forecast on hidden cards
 	} // for loop
 
 	if (targetCard == 'cardBrooklyn') cardContents += '</ul>';
@@ -534,9 +600,17 @@ function parseWeather(jsonObjectName, targetCard){
 	$('#' + targetCard).html(cardContents)
 		.css('background-color', '#' + colorSpectrum.colourAt(0))
 		.attr('city', jsonObjectName);
-	if (targetCard == 'cardBrooklyn') setupAnimation(mainWeatherCondition);
+	if (targetCard == 'cardBrooklyn') setupAnimation();
 } // parseWeather
 
+
+/* 
+==============================================
+==============================================
+HTML generation helpers
+==============================================
+==============================================
+*/
 function generateExtendedForecastItem(itemPrep){
 	return '<li class="' + itemPrep.classes + '" style="background-color:' + itemPrep.bgColor + '"><div class="time">' + 
 		itemPrep.timestamp + '</div><div class="weather">' + 
@@ -580,42 +654,6 @@ function findWeatherIcon(itemPrep){
 	return '<img class="weatherIcon" src="img/' + imgPath + '" alt="' + itemPrep.weatherDesc + '">';
 } // findWeatherIcon
 
-function getWeatherData(targetLocation){
-	$.ajax({
-		method: "GET",
-		url: "http://api.openweathermap.org/data/2.5/forecast",
-		data: {
-			id: targetLocation.id,
-			mode: 'json',
-			APPID: 'c5e0b01bf32a03207f66c5b14301fe45',
-			units: 'imperial'
-		},
-
-		success: function(data,status,xhr){
-			if (data.cod == 200) cityWeatherInfo[targetLocation.name] = data;
-		},
-		error: function(xhr, status, error){
-			console.log("Error!" + xhr.status);
-		},
-		complete: function(){
-			parseWeather(targetLocation.name, targetLocation.preferredCard);
-		},
-		dataType: "json"
-	});
-} // getWeatherData
-
-function geo_success(position) {
-	currentLocation.longitude = position.coords.longitude;
-	currentLocation.latitude = position.coords.latitude;
-	getWeatherData();
-
-} // geo_success
-
-function geo_error(error) {
-	currentLocation = defaultLocations['Brooklyn'];
-	console.log('ERROR(' + error.code + '): ' + error.message);
-	getWeatherData();
-} // geo_error
 
 function dayOfTheWeek(day){
 	switch (day){
@@ -647,29 +685,56 @@ function prettyTime(hour){
 }
 
 
-function prepSVGPathForCanvas(vectorTarget, css){
-	var cssString = 'path, polygon { fill: rgba(255, 255, 255, 0.25); }';
 
-	if (typeof css === 'object'){
-		for (var key in css) {
-			if (css.hasOwnProperty(key)) {
-				cssString += key + '{';
-					for (var keyCssItem in css[key]) {
-						if (css[key].hasOwnProperty(keyCssItem)) {
-							cssString += keyCssItem + ':' + css[key][keyCssItem] + ';'
-						}
-					}
-				cssString += '}'
-			}
-		}
-	} 
+/* 
+==============================================
+==============================================
+API Call
+==============================================
+==============================================
+*/
+function getWeatherData(targetLocation){
+	$.ajax({
+		method: "GET",
+		url: "http://api.openweathermap.org/data/2.5/forecast",
+		data: {
+			id: targetLocation.id,
+			mode: 'json',
+			APPID: 'c5e0b01bf32a03207f66c5b14301fe45',
+			units: 'imperial'
+		},
 
-	return 'data:image/svg+xml,' + 
-		encodeURIComponent(
-			'<svg xmlns="http://www.w3.org/2000/svg" width="' + 
-			vectorTarget.width + '" height="' + vectorTarget.height + 
-			'" viewBox="0 0 ' + vectorTarget.width + ' ' + vectorTarget.height + '">' +
-			'<style type="text/css"><![CDATA[ '+ cssString + '  ]]></style>' +
-			vectorTarget.path + '</svg>'
-		);
-} //prepSVGPathForCanvas
+		success: function(data,status,xhr){
+			if (data.cod == 200) cityWeatherInfo[targetLocation.name] = data;
+		},
+		error: function(xhr, status, error){
+			console.log("Error!" + xhr.status);
+		},
+		complete: function(){
+			parseWeather(targetLocation.name, targetLocation.preferredCard); // re-render regardless
+		},
+		dataType: "json"
+	});
+} // getWeatherData
+
+
+/* 
+==============================================
+==============================================
+Geolocation helpers
+==============================================
+==============================================
+*/
+function geo_success(position) {
+	currentLocation.longitude = position.coords.longitude;
+	currentLocation.latitude = position.coords.latitude;
+	getWeatherData();
+
+} // geo_success
+
+function geo_error(error) {
+	currentLocation = defaultLocations['Brooklyn'];
+	console.log('ERROR(' + error.code + '): ' + error.message);
+	getWeatherData();
+} // geo_error
+
