@@ -1,0 +1,68 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Weather App</title>
+	<meta name="description" content="Simple weather app">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="manifest" href="site.webmanifest">
+	<link rel="apple-touch-icon" href="icon.png">
+	<!-- Place favicon.ico in the root directory -->
+
+
+	<link href="https://fonts.googleapis.com/css?family=Biryani:400,900" rel="stylesheet">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="">
+	<!--[if lte IE 9]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+
+	<!-- Add your site or application content here -->
+	
+	<div id="largeBgImage">
+	</div>
+	<!-- /#largeBgImage -->
+
+	<ul id="cardHolder" city="Holder">
+		<li id="searchBox">
+			<form id="searchUI" action="">
+				<input type="text" id="searchTextbox" placeholder="Search is down…" value="Search is down…">
+				
+				<button id="searchToggle">
+					<img id="iconSearch" src="img/search.png" alt="">
+					<img id="iconClose" src="img/close.png" alt="">
+				</button>
+			</form>
+			
+
+			<h4>Favorite Cities</h4>
+		</li>
+		<li class="card" id="cardTokyo" city="Tokyo"></li>
+		<li class="card" id="cardSantaMonica" city="SantaMonica"></li>
+		<li class="card" id="cardAmsterdam" city="Amsterdam"></li>
+		<li class="card" id="cardHonolulu" city="Honolulu"></li>
+		<li class="card active" id="cardBrooklyn" city="Brooklyn">
+			
+		</li>
+	</ul>
+	<!-- /#cardHolder -->
+
+
+
+	<script src="js/vendor/modernizr-3.6.0.min.js"></script>
+	<script src="js/vendor/jquery-3.3.1.min.js"></script>
+	<script src="js/vendor/rainbowvis.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/sampleData.js"></script>
+	<script src="js/vectors.js"></script>
+	<script src="js/noAPI.js"></script>
+
+</body>
+
+</html>

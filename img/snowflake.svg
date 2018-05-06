@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>snowflake</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="snowflake" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="*-copy" fill="#FFFFFF" points="139.759036 99.5983936 200 125.301205 172.289157 173.493976 119.678715 134.136546 127.710843 199.196787 72.2891566 199.196787 80.3212851 134.136546 27.7108434 173.493976 5.22248911e-13 125.301205 60.2409639 99.5983936 5.22248911e-13 73.8955823 27.7108434 25.7028112 80.3212851 65.060241 72.2891566 0 127.710843 0 119.678715 65.060241 172.289157 25.7028112 200 73.8955823"></polygon>
+    </g>
+</svg>

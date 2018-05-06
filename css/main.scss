@@ -1,0 +1,1102 @@
+/*! HTML5 Boilerplate v6.1.0 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html {
+	color: #222;
+	font-size: 1em;
+	line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * Vendor-prefixed and regular ::selection selectors cannot be combined:
+ * https://stackoverflow.com/a/16982510/7133471
+ *
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+	vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+	resize: vertical;
+}
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+
+.browserupgrade {
+	margin: 0.2em 0;
+	background: #ccc;
+	color: #000;
+	padding: 0.2em 0;
+}
+
+
+/*
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	
+
+	Author's custom styles
+
+
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	*/
+
+
+body {
+	font-family: 'Biryani', sans-serif;
+	font-weight: 400;
+
+	background-color: #212121;
+}
+.textColorLight {
+	color: #fff;
+}
+
+.textColorDark {
+	color: #000;
+}
+
+img.weatherIcon {
+	width: 2rem;
+	height: 2rem;
+
+	margin-top: -0.5rem;
+}
+
+.weatherTemp {
+	clear: none;
+	display: inline-block;
+
+	font-weight: 900;
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+
+	padding-left: 0.75rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 400;
+
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	font-weight: 900;
+	
+	font-size: 1.75rem;
+	line-height: 1.75rem;
+}
+
+h2 {
+	line-height: 1.75rem;
+}
+
+sup {
+	font-weight: 400;
+}
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#largeBgImage {
+	display: none;
+
+}
+
+ul#cardHolder {
+	display: grid;
+
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: 15px 15px 15px 15px auto;
+
+	grid-column-gap: 2rem;
+
+	margin: 15px 0;
+
+	
+	color: #fff;
+
+	#searchBox {
+		grid-column: 10 / span 2;
+		grid-row: 1;
+
+		width: 3rem;
+		height: 3rem;
+
+		padding-top: 0.75rem;
+
+		background-color: transparent;
+
+		z-index: 10;
+
+		#searchUI {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			
+			margin: 0;
+			
+
+			#searchTextbox {
+				display: none;
+
+				flex-grow: 2;
+
+				background-color: #424242;
+				color: #fff;
+
+				border-radius: 1rem;
+				border: 0;
+				
+				margin-right: 1rem;
+			
+				padding: 1.25rem 1rem 1rem;
+			} /*searchTextbox*/
+
+
+
+			#searchToggle {
+				padding: 1rem;
+
+				
+				border-radius: 3rem;
+				border: 0;
+
+				background-color: #E65100;
+
+				box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
+
+				cursor: pointer;
+
+				img {
+					width: 1.5rem;
+					height: 1.5rem;
+				}
+
+				
+				#iconSearch {
+					display: inline;
+				}
+
+				#iconClose {
+					display: none;
+				}
+			} /*searchToggle*/
+		}
+
+		
+
+		h4 {
+			display: none;
+			margin: 2rem 0 0 1rem;
+		}
+	}
+	li.card {
+		grid-column: 1 / span 12;
+
+		border-radius: 8px;
+
+		overflow: hidden;
+		height: 30px;
+
+		display: grid;
+		grid-template-columns: 1fr;
+
+		-webkit-transition: height 250ms linear;
+		-moz-transition: height 250ms linear;
+		-ms-transition: height 250ms linear;
+		-o-transition: height 250ms linear;
+		transition: height 250ms linear;
+
+		canvas {
+			grid-row: 1;
+			grid-column: 1;
+
+			/*background-color: #e60;*/
+
+			z-index: 1;
+
+			display: none;
+
+
+		}
+
+		.cardHeader {
+			grid-row: 1;
+			grid-column: 1;
+
+			z-index: 2;
+
+			display: none;
+
+			padding: 2.5rem 2rem 2rem;
+
+
+
+			h1 {
+
+			}
+
+			
+
+			.bigDesc {
+				
+			}
+
+			.weatherIcon {
+				display: none;
+			}
+		}
+
+		#extendedForecast {
+			grid-row: 2;
+
+
+			li {
+				background-color: #ddd;
+
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: baseline;
+
+				padding: 1.5rem 1.5rem 1.25rem 2rem;
+
+				.time {
+					
+
+
+				}
+
+				.weather {
+					.weatherTemp {
+						
+					}
+					
+
+					
+				}
+			}
+
+			li:nth-child(8) {
+					border-radius: 0 0 8px 8px;
+			}
+
+
+
+		}
+	}
+
+	li.card.active {
+		canvas {
+			display: block;
+		}
+
+		.cardHeader {
+
+			display: block;
+
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			.weatherTemp {
+				font-size: 5rem;
+				line-height: 5rem;
+
+				padding-left: 0;
+			}
+
+			
+		}
+
+		
+
+	}
+
+	#cardTokyo {
+		grid-row: 1;
+		background-color: #BF360C;
+
+		z-index: 1;
+	}
+	#cardSantaMonica {
+		grid-row: 2;
+		background-color: #B71C1C;
+
+		z-index: 2;
+	}
+	#cardAmsterdam {
+		grid-row: 3;
+		background-color: #880E4F;
+
+		z-index: 3;
+	}
+	#cardHonolulu {
+		grid-row: 4;
+		background-color: #4a148c;
+
+		z-index: 4;
+	}
+	#cardBrooklyn {
+		grid-row: 5;
+		background-color: #1A237E;
+
+		z-index: 5;
+
+		height: auto;
+
+		overflow: visible;
+	}
+	
+}
+
+/*
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	
+
+	Search Mode
+
+
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	*/
+
+body.searchMode {
+	
+
+	ul#cardHolder {
+	
+		grid-template-rows: auto;
+
+		
+		#searchBox {
+			grid-column: 1 / span 12;
+			grid-row: 1;
+
+			width: auto;
+			height: auto;
+
+			padding: 1rem;
+
+			#searchUI { 
+				
+
+
+				#searchTextbox {
+					display: inline-block;
+
+
+				}
+
+				#searchButton {
+					display: block;
+
+					box-shadow: none;
+
+					border-radius: 0 1rem 1rem 0;
+				}
+
+				button {
+					img {
+						/*width: 1rem;
+						height: 1rem;*/
+					}
+				}
+
+				#searchToggle {
+					background-color: transparent;
+					padding: 0;
+
+					#iconSearch {
+						display: none;
+					}
+
+					#iconClose {
+						display: inline; 
+					}
+				}
+			}/*#searchUI */
+
+			h4 {
+				display: block;
+			}
+			
+			
+		}
+
+
+		li.card, li.card.active {
+			
+			height: auto;
+			overflow: visible;
+
+			border-radius: 0;
+
+			box-shadow: none;
+
+			cursor: pointer;
+
+			
+
+			canvas {
+				
+			}
+
+			.cardHeader {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: baseline;
+
+				padding: 1.5rem 1.5rem 1.25rem 2rem;
+
+
+				h1 {
+					font-size: 1rem;
+					font-weight: 400;
+					line-height: 1.4rem;
+
+					margin-top: 0;
+					margin-bottom: 0;
+
+					order: -1;
+				}
+
+				
+
+				h2 {
+					font-size: 1.17rem;
+					/*display: none;*/
+				}
+
+				.weatherTemp {
+					font-size: 1.5rem;
+					line-height: 1.5rem;
+
+					padding-left: 0.75rem;
+				}
+
+				.bigDesc {
+					display:  none;
+				}
+
+				.weatherIcon {
+					display: inline;
+				}
+
+			} /*cardHeader*/
+
+			#extendedForecast {
+				
+			}
+
+		}
+		
+		li.card.active {
+			cursor: pointer;
+
+			canvas {
+				display: none;
+			}
+
+			#extendedForecast {
+				display: none;
+			}
+		}
+
+		#cardTokyo {
+			grid-row: auto;
+		}
+		#cardSantaMonica {
+			grid-row: auto;
+		}
+		#cardAmsterdam {
+			grid-row: auto;
+		}
+		#cardHonolulu {
+			grid-row: auto;
+		}
+		#cardBrooklyn {
+			grid-row: auto;
+			
+		}
+	} 
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide visually and from screen readers
+ */
+
+.hidden {
+	display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+
+.visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	white-space: nowrap; /* 1 */
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	width: auto;
+	white-space: inherit;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+.invisible {
+	visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+	content: " "; /* 1 */
+	display: table; /* 2 */
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+/*
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	
+
+	Responsive
+
+
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	==========================================================================
+	*/
+
+
+
+
+@media only screen and (min-width: 700px)  {
+	/* Style adjustments for viewports that meet the condition */
+
+	.weather {
+		margin-top: 1rem;
+		display: block;
+	}
+	.weatherTemp {
+		font-size: 2.5rem;
+		padding-left: 0.5rem;
+
+	}
+
+	ul#cardHolder {
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: auto;
+		grid-column-gap: 1rem;
+
+		margin: 2rem;
+
+		max-width: 960px;
+
+
+		#searchBox {
+			grid-column: 8 / span 5;
+			grid-row: 1;
+
+			width: auto;
+			height: auto;
+
+			padding-top: 0;
+
+
+			#searchUI { 
+				display: block;
+				position: relative;
+
+				#searchTextbox {
+					display: inline-block;
+
+					font-size: 0.625rem;
+					line-height: 0.625rem;
+
+					padding: 0.75rem 1rem 0.5rem;
+
+					margin-right: 0;
+
+					width: 100%;
+					height: 2rem;
+
+					-moz-box-sizing: border-box;
+					-webkit-box-sizing: border-box;
+					box-sizing: border-box;
+
+					/*background-color: #424242;
+					color: #fff;
+
+					border-radius: 1rem;
+					border: 0;
+					
+					margin-right: 1rem;
+					
+					*/
+				}
+
+
+				#searchToggle {
+					padding: 0.4rem 0.75rem ;
+					background-color: transparent;
+
+					position: absolute;
+					right: 0;
+					top: 0;
+
+					box-shadow: none;
+
+					/*
+
+					
+					border-radius: 3rem;
+					border: 0;
+
+					
+
+					box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
+
+					cursor: pointer;*/
+
+					img {
+						width: 0.875rem;
+						height: 0.875rem;
+					}
+
+					#iconSearch {
+						display: inline;
+					}
+
+					#iconClose {
+						display: none; 
+					}
+				}
+
+				
+			}/*#searchUI */
+		} /*#searchBox*/
+
+		li.card {
+			/*border-radius: 0;*/
+
+			overflow: visible;
+			height: auto;
+
+			margin-top: 1rem;
+
+
+
+			.cardHeader {
+				display: block;
+
+				h1 {
+					
+				}
+
+				
+
+				h2 {
+					font-size: 1.17rem;
+					/*display: none;*/
+				}
+
+				
+
+				
+
+			} /*cardHeader*/
+
+			#extendedForecast {
+				display: grid;
+
+				grid-template-columns: repeat(4, 1fr);
+
+
+
+				li {
+					flex-wrap: wrap;
+					justify-content: flex-start;
+					/*text-align: center;*/
+
+					padding: 1rem;
+
+					.time {
+						flex-basis: 100%;
+
+
+					}
+
+					.weather {
+						flex-basis: 100%;
+
+						display: flex;
+						flex-direction: row;
+						/*justify-content: center;*/
+
+						
+
+						img.weatherIcon {
+							/*display: block;*/
+	
+							margin-right: 0.5rem;
+
+						}
+						
+
+						
+					}
+				} /*extendedForecast li */
+
+				
+
+				li:nth-child(5) {
+					border-radius: 0 0 0 8px;
+				}
+
+				li:nth-child(8) {
+					border-radius: 0 0 8px 0;
+				}
+
+
+
+			} /*extendedForecast*/
+
+
+		} /*li card*/
+
+		li.card.active {
+
+		} /*li card act*/
+
+		
+		#cardTokyo, #cardSantaMonica, #cardAmsterdam, #cardHonolulu {
+			cursor: pointer;
+
+
+			.cardHeader {
+				padding: 1rem;
+				text-align: center;
+
+				h1 {
+					font-size: 1rem;
+					font-weight: 400;
+					line-height: 1.4rem;
+				}
+				.bigDesc {
+					display:  none;
+				}
+
+				.weatherIcon {
+					display: inline-block;
+					margin-top: -1.25rem;
+				}
+			} /* .cardHeader*/
+			
+		}
+		
+
+		
+
+		#cardTokyo {
+			grid-column: 1 / span 3;
+			grid-row: 3;
+		}
+		#cardSantaMonica {
+			grid-column: 4 / span 3;
+			grid-row: 3;
+		}
+		#cardAmsterdam {
+			grid-column: 7 / span 3;
+			grid-row: 3;
+		}
+		#cardHonolulu {
+			grid-column: 10 / span 3;
+			grid-row: 3;
+		}
+		#cardBrooklyn {
+			grid-column: 1 / span 12;
+			grid-row: 2;
+			
+		}
+
+
+		 
+	} /*ul#cardHolder*/
+} /*700 700*/
+
+
+@media only screen and (min-width: 1024px)  {
+	body {
+		
+	}
+
+	#largeBgImage {
+		display: block;
+
+		z-index: -1;
+
+		position: fixed;
+
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+
+		background-image: url('https://untappedcities-wpengine.netdna-ssl.com/wp-content/uploads/2017/06/2_The-Top-10-Secrets-of-Downtown-Brooklyn-in-NYC_Brooklyn-Bridge_Sunset_NYC_Untapped-Cities.v1.jpg');
+		background-size: cover;
+
+		opacity: 0.02;
+	}
+
+	ul#cardHolder {
+		margin: 2rem auto;
+
+		li.card {
+			#extendedForecast {
+				li {
+					padding: 1rem 2rem;
+				}
+			}
+		}
+	} /* ul#cardHolder*/
+} /* 1024px */
+
+
+@media print,
+	   (-webkit-min-device-pixel-ratio: 1.25),
+	   (min-resolution: 1.25dppx),
+	   (min-resolution: 120dpi) {
+	/* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   https://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+	*,
+	*:before,
+	*:after {
+		background: transparent !important;
+		color: #000 !important; /* Black prints faster */
+		-webkit-box-shadow: none !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
+
+	a,
+	a:visited {
+		text-decoration: underline;
+	}
+
+	a[href]:after {
+		content: " (" attr(href) ")";
+	}
+
+	abbr[title]:after {
+		content: " (" attr(title) ")";
+	}
+
+	/*
+	 * Don't show links that are fragment identifiers,
+	 * or use the `javascript:` pseudo protocol
+	 */
+
+	a[href^="#"]:after,
+	a[href^="javascript:"]:after {
+		content: "";
+	}
+
+	pre {
+		white-space: pre-wrap !important;
+	}
+	pre,
+	blockquote {
+		border: 1px solid #999;
+		page-break-inside: avoid;
+	}
+
+	/*
+	 * Printing Tables:
+	 * http://css-discuss.incutio.com/wiki/Printing_Tables
+	 */
+
+	thead {
+		display: table-header-group;
+	}
+
+	tr,
+	img {
+		page-break-inside: avoid;
+	}
+
+	p,
+	h2,
+	h3 {
+		orphans: 3;
+		widows: 3;
+	}
+
+	h2,
+	h3 {
+		page-break-after: avoid;
+	}
+}
