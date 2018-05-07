@@ -4,6 +4,11 @@ A sample weather app pulling data from OpenWeatherMap. [Currently live on phongh
 
 A version that doesn't use the API can found [here](http://phonghtran.com/labs/weatherApp/noAPI.html).
 
+
+## Build Process
+
+Just download and open. jQuery included in files. 
+
 ## Thought Process
 
 1. For time constraints, I went minimal over full utility. So it's just temperature and general weather condition.
