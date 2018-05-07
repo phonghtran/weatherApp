@@ -97,10 +97,14 @@ $( document ).ready(function() {
 			canvasAspectRatio = 3; // a bit more rectangular 
 
 			$('#searchToggle').attr('disabled', true);
+			$('li.card').removeAttr('style'); // the weirdest bug on android mobile
+
 		} else {
 			canvasAspectRatio = 1.33;
 
 			$('#searchToggle').attr('disabled', false);
+			$('li.card').width(wW); // the weirdest bug on android mobile
+
 		}
 
 		cW = $('#cardHolder').width();
@@ -116,8 +120,13 @@ $( document ).ready(function() {
 
 	// Call the API
 	for (city in defaultLocations){ 
-		// parseWeather(defaultLocations[city].name); // no API
-		getWeatherData(defaultLocations[city]); // the API
+		if ($('body').hasClass('noAPI')){
+			parseWeather(defaultLocations[city].name); // no API
+		} else {
+			getWeatherData(defaultLocations[city]); // the API
+		}
+		
+		
 	}
 
 	// turn back on at end
