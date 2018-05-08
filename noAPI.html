@@ -27,7 +27,7 @@
 
 	<!-- Add your site or application content here -->
 	
-	<div id="largeBgImage">
+	<div id="largeBgImage" style="background-image: url(&quot;https://travel.usnews.com/static-travel/images/destinations/59/waikiki_beach_honolulu.jpg&quot;);">
 	</div>
 	<!-- /#largeBgImage -->
 
@@ -35,22 +35,84 @@
 		<li id="searchBox">
 			<form id="searchUI" action="">
 				<input type="text" id="searchTextbox" placeholder="Search is down…" value="Search is down…">
-				
-				<button id="searchToggle">
-					<img id="iconSearch" src="img/search.png" alt="">
-					<img id="iconClose" src="img/close.png" alt="">
-				</button>
+
+				<button id="searchToggle" disabled="disabled">
+						<img id="iconSearch" src="img/search.png" alt="">
+						<img id="iconClose" src="img/close.png" alt="">
+					</button>
 			</form>
-			
+
 
 			<h4>Favorite Cities</h4>
 		</li>
-		<li class="card" id="cardTokyo" city="Tokyo"></li>
-		<li class="card" id="cardSantaMonica" city="SantaMonica"></li>
-		<li class="card" id="cardAmsterdam" city="Amsterdam"></li>
-		<li class="card" id="cardHonolulu" city="Honolulu"></li>
-		<li class="card active" id="cardBrooklyn" city="Brooklyn">
-			
+		<li class="card" id="cardTokyo" city="tokyo" style="">
+			<div class="cardHeader">
+				<h1>Tokyo</h1><span class="weather"><img class="weatherIcon" src="img/atmosphere.png" alt="Foggy "><span class=" weatherTemp">71<sup>°</sup></span>
+				<h2 class="bigDesc">Foggy </h2>
+				</span>
+			</div>
+		</li>
+		<li class="card" id="cardSantaMonica" city="santaMonica" style="">
+			<div class="cardHeader">
+				<h1>Santa Monica</h1><span class="weather"><img class="weatherIcon" src="img/partlyCloudyN.png" alt="few clouds"><span class=" weatherTemp">66<sup>°</sup></span>
+				<h2 class="bigDesc">Few Clouds</h2>
+				</span>
+			</div>
+		</li>
+		<li class="card" id="cardAmsterdam" city="amsterdam" style="">
+			<div class="cardHeader">
+				<h1>Amsterdam</h1><span class="weather"><img class="weatherIcon" src="img/snow.png" alt="Snow"><span class=" weatherTemp">44<sup>°</sup></span>
+				<h2 class="bigDesc">Snow</h2>
+				</span>
+			</div>
+		</li>
+		<li class="card" id="cardHonolulu" city="honolulu" style="">
+			<div class="cardHeader">
+				<h1>Honolulu</h1><span class="weather"><img class="weatherIcon" src="img/rain.png" alt="light rain"><span class=" weatherTemp">78<sup>°</sup></span>
+				<h2 class="bigDesc">Light Rain</h2>
+				</span>
+			</div>
+		</li>
+		<li class="card active" id="cardBrooklyn" city="brooklyn" style="">
+			<div class="cardHeader">
+				<h1>Brooklyn</h1><span class="weather"><img class="weatherIcon" src="img/thunder.png" alt="Thunderstorm"><span class=" weatherTemp">80<sup>°</sup></span>
+				<h2 class="bigDesc">Thunderstorm</h2>
+				</span>
+			</div><canvas id="canvasCurrentCity" width="704" height="234.66666666666666"></canvas>
+			<ul id="extendedForecast">
+				<li class="" style="background-color:#374195">
+					<div class="time">5PM</div>
+					<div class="weather"><img class="weatherIcon" src="img/rain.png" alt="light rain"><span class="weatherTemp">80<sup>°</sup> </span></div>
+				</li>
+				<li class="" style="background-color:#374195">
+					<div class="time">8PM</div>
+					<div class="weather"><img class="weatherIcon" src="img/cloudy.png" alt="broken clouds"><span class="weatherTemp">80<sup>°</sup> </span></div>
+				</li>
+				<li class="" style="background-color:#374195">
+					<div class="time">11PM</div>
+					<div class="weather"><img class="weatherIcon" src="img/clearN.png" alt="clear sky"><span class="weatherTemp">79<sup>°</sup> </span></div>
+				</li>
+				<li class="" style="background-color:#374195">
+					<div class="time">2AM</div>
+					<div class="weather"><img class="weatherIcon" src="img/cloudy.png" alt="broken clouds"><span class="weatherTemp">73<sup>°</sup> </span></div>
+				</li>
+				<li class="" style="background-color:#4a55a5">
+					<div class="time">Saturday</div>
+					<div class="weather"><img class="weatherIcon" src="img/cloudy.png" alt="broken clouds"><span class="weatherTemp">70<sup>°</sup> </span></div>
+				</li>
+				<li class="" style="background-color:#4a55a5">
+					<div class="time">Sunday</div>
+					<div class="weather"><img class="weatherIcon" src="img/rain.png" alt="light rain"><span class="weatherTemp">60<sup>°</sup> </span></div>
+				</li>
+				<li class="" style="background-color:#4a55a5">
+					<div class="time">Monday</div>
+					<div class="weather"><img class="weatherIcon" src="img/clear.png" alt="clear sky"><span class="weatherTemp">61<sup>°</sup> </span></div>
+				</li>
+				<li class="" style="background-color:#4a55a5">
+					<div class="time">Tuesday</div>
+					<div class="weather"><img class="weatherIcon" src="img/clear.png" alt="clear sky"><span class="weatherTemp">60<sup>°</sup> </span></div>
+				</li>
+			</ul>
 		</li>
 	</ul>
 	<!-- /#cardHolder -->
