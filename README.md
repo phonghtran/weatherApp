@@ -28,6 +28,7 @@ Just download and open. jQuery included in files.
 4. Went for super minimal data presentation in-lieu of stats like humidity and wind. Cleaner but less useful. 
 5. The JS has a few cheats to save time like size-specific magic numbers and inefficient loops.
 6. The intention was to pull shapes from the typeface to create the icons, but the timeframe didn't allow for much finesse.
+7. Didn't use a framework. Seemed like overkill and didn't need the scaling. But still being in JS, you'll lose SEO for future development. Speed over robustness. 
 
 ## Wishlist
 
