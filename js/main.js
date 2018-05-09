@@ -141,9 +141,10 @@ $( document ).ready(function() {
 
 
 		if ($('body').hasClass('searchMode')){
-			for (city in defaultLocations){
-				parseWeather(defaultLocations[city].name);
-			}
+			// this would resort the recent lists into its original order, but it also resets the main view
+			// for (city in defaultLocations){
+			// 	parseWeather(defaultLocations[city].name);
+			// }
 		} else {
 			window.requestAnimationFrame(function(){
 				renderAnimation();
@@ -157,7 +158,7 @@ $( document ).ready(function() {
 
 
 		if ($('body').hasClass('searchMode') || (wW > 700)){
-			var previousCity = $('#cardBrooklyn').attr('city');
+			let previousCity = $('#cardBrooklyn').attr('city');
 
 			parseWeather($(this).attr('city'), 'cardBrooklyn');
 			parseWeather(previousCity, $(this).attr('id'));
@@ -177,20 +178,20 @@ Main animation rendering
 */
 
 function setupAnimation(){
-	var mainCategory = parseInt(mainWeatherCondition.weatherId / 100);
+	let mainCategory = parseInt(mainWeatherCondition.weatherId / 100);
 	
 	canvasObjectStorage = {};
 
 	switch  (mainCategory){
 		case 2: // Group 2xx: Thunderstorm
 			// One stable icon and one randomly fires
-			for (var i = 0; i < 2; i++){
+			for (let i = 0; i < 2; i++){
 				canvasObjectStorage[i] = {};
 
 				canvasObjectStorage[i].image = new Image();
 				canvasObjectStorage[i].image.src = prepSVGPathForCanvas(vectors.thunder);
 
-				var scaleVector = cH / vectors.thunder.height * 0.8;
+				let scaleVector = cH / vectors.thunder.height * 0.8;
 
 				canvasObjectStorage[i].viewBox = {
 					x: 0,
@@ -218,11 +219,11 @@ function setupAnimation(){
 		case 5: // Group 5xx: Rain
 		case 6: // Group 6xx: Snow
 
-			var numOfItems = Math.floor(Math.random() * mainCategory ) + 2,
+			let numOfItems = Math.floor(Math.random() * mainCategory ) + 2,
 				dropSpeed = Math.random() * 2 + 1,
 				targetVector = (mainCategory == 6) ? vectors.snow : vectors.rain;
 
-			for (var i = 0; i <= numOfItems; i++){
+			for (let i = 0; i <= numOfItems; i++){
 				canvasObjectStorage[i] = {};
 
 				canvasObjectStorage[i].image = new Image();
@@ -232,7 +233,7 @@ function setupAnimation(){
 					}	
 				});
 
-				var newSize = (i == numOfItems) ? cH * 0.3 : Math.random() * 0.2 * cH + (cH * 0.2);
+				let newSize = (i == numOfItems) ? cH * 0.3 : Math.random() * 0.2 * cH + (cH * 0.2);
 
 				canvasObjectStorage[i].viewBox = {
 					x: 0,
@@ -258,7 +259,7 @@ function setupAnimation(){
 		break;
 		
 		case 7: // Group 7xx: Atmosphere
-			for (var i = 0; i < 20; i++){
+			for (let i = 0; i < 20; i++){
 				canvasObjectStorage[i] = {};
 
 				canvasObjectStorage[i].image = new Image();
@@ -268,7 +269,7 @@ function setupAnimation(){
 					}
 				});
 
-				var scaleVector = cW / vectors.atmosphereBar.width;
+				let scaleVector = cW / vectors.atmosphereBar.width;
 
 				canvasObjectStorage[i].viewBox = {
 					x: 0,
@@ -298,7 +299,7 @@ function setupAnimation(){
 			if (mainWeatherCondition.weatherId == 800){ // Group 801: Partly Cloudy
 				
 
-				var i = 0,
+				let i = 0,
 					targetVector = (mainWeatherCondition.isNight) ? vectors.moon : vectors.sun;
 
 				canvasObjectStorage[i] = {};
@@ -306,7 +307,7 @@ function setupAnimation(){
 				canvasObjectStorage[i].image = new Image();
 				canvasObjectStorage[i].image.src = prepSVGPathForCanvas(targetVector);
 
-				var scaleVector = cH / targetVector.height * 0.5;
+				let scaleVector = cH / targetVector.height * 0.5;
 
 				canvasObjectStorage[i].viewBox = {
 					x: 0,
@@ -333,16 +334,16 @@ function setupAnimation(){
 
 				
 			} else { // Group 80x: Clouds
-				var numOfItems = (mainWeatherCondition.weatherId == 801) ? 1 : 5;
+				let numOfItems = (mainWeatherCondition.weatherId == 801) ? 1 : 5;
 
-				for (var i = 0; i <= numOfItems; i++){
-					var targetVector = vectors['cloud'+ (Math.floor(Math.random()*3) + 1)];
+				for (let i = 0; i <= numOfItems; i++){
+					let targetVector = vectors['cloud'+ (Math.floor(Math.random()*3) + 1)];
 					canvasObjectStorage[i] = {};
 
 					canvasObjectStorage[i].image = new Image();
 					canvasObjectStorage[i].image.src = prepSVGPathForCanvas(targetVector);
 
-					var scaleVector = cH / targetVector.height * 0.5;
+					let scaleVector = cH / targetVector.height * 0.5;
 					if (i > 0) scaleVector = scaleVector * Math.random() + 0.5;
 
 					canvasObjectStorage[i].viewBox = {
@@ -378,11 +379,11 @@ function setupAnimation(){
 } // setupAnimation
 
 function renderAnimation(){
-	var activeCanvas = document.getElementById('canvasCurrentCity');
+	let activeCanvas = document.getElementById('canvasCurrentCity');
 	
 	if (!activeCanvas) return;
 
-	var ctx = activeCanvas.getContext('2d');
+	let ctx = activeCanvas.getContext('2d');
 	
 
 	ctx.clearRect(0, 0, cW, cH);
@@ -410,7 +411,7 @@ function renderAnimation(){
 			} // additive to position
 
 			if (newTransform == 'flash'){
-				var scaleVector = (Math.random() < 0.05) ? cH / canvasObjectStorage[object].viewBox.h * 1.2 * Math.random() : 0;
+				let scaleVector = (Math.random() < 0.05) ? cH / canvasObjectStorage[object].viewBox.h * 1.2 * Math.random() : 0;
 
 				canvasObjectStorage[object].targetViewBow = {
 					x: cW * Math.random(),
@@ -464,13 +465,13 @@ function renderAnimation(){
 
 
 function prepSVGPathForCanvas(vectorTarget, css){
-	var cssString = 'path, polygon { fill: rgba(255, 255, 255, 0.25); }';
+	let cssString = 'path, polygon { fill: rgba(255, 255, 255, 0.25); }';
 
 	if (typeof css === 'object'){
-		for (var key in css) {
+		for (let key in css) {
 			if (css.hasOwnProperty(key)) {
 				cssString += key + '{';
-					for (var keyCssItem in css[key]) {
+					for (let keyCssItem in css[key]) {
 						if (css[key].hasOwnProperty(keyCssItem)) {
 							cssString += keyCssItem + ':' + css[key][keyCssItem] + ';'
 						}
@@ -498,7 +499,7 @@ Main HTML generator
 ==============================================
 */
 function parseWeather(jsonObjectName, targetCard){
-	var jsonObject = cityWeatherInfo[jsonObjectName], // pull from the big JSON file, the API updates this 
+	let jsonObject = cityWeatherInfo[jsonObjectName], // pull from the big JSON file, the API updates this 
 		listItemPosition = 0, // the position of reading each weather entry
 		totalCount = 0, // total rendered items
 		currentColor = 1, // to pull from gradient
@@ -515,8 +516,8 @@ function parseWeather(jsonObjectName, targetCard){
 		defaultLocations[jsonObjectName].colorSpectrum[1]
 	);
 
-	for (var listItem in jsonObject.list) {
-		var currentListItem = jsonObject['list'][listItem],
+	for (let listItem in jsonObject.list) {
+		let currentListItem = jsonObject['list'][listItem],
 			dateObj = new Date(currentListItem['dt'] * 1000),
 			itemPrep = { // formatting the API into a object passable to the helper functions
 				bgColor: '' , 
@@ -628,7 +629,7 @@ function generateExtendedForecastItem(itemPrep){
 }
 
 function findWeatherIcon(itemPrep){
-	var imgPath = '',
+	let imgPath = '',
 		mainCategory = parseInt(itemPrep.weatherId / 100);
 
 	switch  (mainCategory){
